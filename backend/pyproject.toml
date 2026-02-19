@@ -1,0 +1,35 @@
+[project]
+name = "readme-to-feishu-backend"
+version = "0.1.0"
+description = "FastAPI backend for README → Feishu Docx publishing"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+  "fastapi>=0.109.0",
+  "uvicorn[standard]>=0.27.0",
+  "python-multipart>=0.0.6",
+  "httpx>=0.26.0",
+  "pydantic>=2.5.0",
+  "pydantic-settings>=2.1.0",
+  "redis>=5.0.0",
+  "sse-starlette>=1.8.0",
+  "lark-oapi>=1.2.0",
+  "mistune>=3.0.0",
+  "python-dotenv>=1.0.0",
+  "openai>=1.0.0",
+]
+
+[tool.poetry]
+packages = [{ include = "readme_to_feishu", from = "src" }]
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.6.0"
+pytest = "^8.3.0"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"
+

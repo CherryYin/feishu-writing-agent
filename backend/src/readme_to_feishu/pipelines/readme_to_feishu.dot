@@ -1,0 +1,22 @@
+// README to Feishu pipeline - Attractor spec compliant
+// Flow: start -> fetch_input -> parse -> understand -> convert -> publish -> exit
+
+digraph readme_to_feishu {
+    graph [goal="Convert README markdown to Feishu document", label="README to Feishu"]
+
+    start   [shape=Mdiamond, label="Start"]
+    exit    [shape=Msquare, label="Exit"]
+
+    fetch_input [shape=parallelogram, type="tool", label="Fetch input", tool="fetch_input"]
+    parse       [shape=parallelogram, type="tool", label="Parse Markdown", tool="parse_markdown"]
+    understand  [shape=box, label="Understand", prompt="Analyze the README structure and content type. Suggest which sections to keep or remove, whether to translate, and any content filters. Output a short JSON with keep_sections, remove_sections, translate, filters."]
+    convert     [shape=parallelogram, type="tool", label="Convert to blocks", tool="convert_to_blocks"]
+    publish     [shape=parallelogram, type="tool", label="Publish to Feishu", tool="publish_to_feishu", goal_gate=true]
+
+    start -> fetch_input
+    fetch_input -> parse
+    parse -> understand
+    understand -> convert
+    convert -> publish
+    publish -> exit
+}
